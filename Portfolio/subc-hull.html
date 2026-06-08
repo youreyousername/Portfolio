@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUBC Hull — Kaïto D.S.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --card: #1c1c1c;
+      --border: #2a2a2a;
+      --accent: #c8a96e;
+      --accent2: #4a8fa8;
+      --text: #e8e4dc;
+      --muted: #7a756c;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.5;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-style: italic; color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--muted); text-decoration: none;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* HERO */
+    .project-hero {
+      padding: 9rem 3rem 4rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .back-crumb {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 2rem; transition: color 0.2s;
+    }
+    .back-crumb:hover { color: var(--accent); }
+    .project-role-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+    }
+    .project-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 600; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .project-hero h1 em { font-style: italic; color: var(--accent); }
+    .project-summary {
+      font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .meta-row {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem; margin-top: 1.5rem;
+    }
+    .meta-item { }
+    .meta-key {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 0.2rem;
+    }
+    .meta-val { font-size: 0.88rem; color: var(--text); }
+
+    /* CONTENT */
+    .project-content {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+
+    /* Image blocks */
+    .img-full {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--card); border: 1px solid var(--border);
+      overflow: hidden; margin: 3rem 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-full img { width: 100%; height: 100%; object-fit: cover; }
+    .img-placeholder {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--border); text-transform: uppercase; letter-spacing: 0.1em;
+      text-align: center; padding: 2rem;
+    }
+
+    .img-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; margin: 3rem 0;
+    }
+    .img-grid .img-full { margin: 0; }
+
+    /* Text blocks */
+    .section-chunk { margin: 3rem 0; }
+    .chunk-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 0.8rem;
+    }
+    .chunk-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 600; margin-bottom: 0.8rem;
+    }
+    .chunk-body {
+      font-size: 0.92rem; color: var(--muted); line-height: 1.9; max-width: 680px;
+    }
+    .chunk-body strong { color: var(--text); font-weight: 400; }
+    .chunk-body p { margin-bottom: 0.8rem; }
+
+    /* Key decisions callout */
+    .callout {
+      border-left: 2px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      background: var(--card);
+      margin: 2rem 0;
+    }
+    .callout-label {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .callout p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+    .callout p strong { color: var(--text); font-weight: 400; }
+
+    /* Nav to next project */
+    .project-nav {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      max-width: 900px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .project-nav a {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      letter-spacing: 0.1em; transition: color 0.2s;
+    }
+    .project-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav, .project-hero, .project-content, .project-nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .img-grid { grid-template-columns: 1fr; }
+      .meta-row { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Kaïto D.S.</a>
+    <a href="index.html" class="nav-back">← All Projects</a>
+  </nav>
+
+  <div class="project-hero">
+    <a href="index.html" class="back-crumb">← Portfolio</a>
+    <div class="project-role-tag">SUBC · Hull Team Lead</div>
+    <h1>Human-Powered<br><em>Submarine</em> — Hull</h1>
+    <p class="project-summary">
+      End-to-end design of the hull, viewports, and hatches for a competition wet submarine.
+      CFD-driven geometry, pool-validated buoyancy, and structural testing through physical
+      samples — then into the water myself to make sure it actually works.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-key">Duration</div>
+        <div class="meta-val">Sept 2025 – Present</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Team</div>
+        <div class="meta-val">10 engineers</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Competition</div>
+        <div class="meta-val"><a href="https://subrace.eu" style="color:var(--accent2)">subrace.eu</a></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Tools</div>
+        <div class="meta-val">SolidWorks, Flow Sim, GFRP layup</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-content">
+
+    <!-- Hero image -->
+    <div class="img-full">
+      <!-- <img src="images/subc-hull-hero.jpg" alt="Finished submarine" /> -->
+      <div class="img-placeholder">[ Finished submarine / CAD render — replace with your image ]<br><br>Recommended: images/subc-hull-hero.jpg</div>
+    </div>
+
+    <!-- Section 1: Context -->
+    <div class="section-chunk">
+      <div class="chunk-label">Context</div>
+      <div class="chunk-title">A wet submarine. Fully flooded.</div>
+      <div class="chunk-body">
+        <p>
+          SUBC competes in the European Human Powered Submarine Race. The sub is <strong>wet</strong> —
+          fully flooded, pilot on SCUBA. There's no pressure vessel, no sealing requirement. What
+          there is: a hull that needs to be light, stiff, hydrodynamically clean, and manufacturable
+          by students in a university shop.
+        </p>
+        <p>
+          As hull team lead, I own the hull shell, viewports, hatches, and full assembly integration
+          across four subteams.
+        </p>
+      </div>
+    </div>
+
+    <!-- Image: CAD -->
+    <div class="img-full">
+      <!-- <img src="images/subc-cad.jpg" alt="SolidWorks assembly" /> -->
+      <div class="img-placeholder">[ SolidWorks full assembly CAD — images/subc-cad.jpg ]</div>
+    </div>
+
+    <!-- Section 2: Hydrodynamics -->
+    <div class="section-chunk">
+      <div class="chunk-label">Hydrodynamics & Geometry</div>
+      <div class="chunk-title">Drag minimisation through CFD iteration.</div>
+      <div class="chunk-body">
+        <p>
+          Hull geometry was developed from an airfoil-inspired cross-section and iterated
+          using <strong>SolidWorks Flow Simulation</strong>. Each geometry change was run through
+          CFD to evaluate drag reduction before committing to mould tooling.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Key Design Decision</div>
+      <p>
+        Tophat reinforcements were added along the <strong>latitudinal axis</strong> — essentially
+        a ribcage — to resist bending without adding bulk. Bending resistance was validated through
+        <strong>dogleg test samples</strong> before finalising reinforcement geometry.
+      </p>
+    </div>
+
+    <!-- Section 3: Buoyancy -->
+    <div class="section-chunk">
+      <div class="chunk-label">Buoyancy & Weight Budget</div>
+      <div class="chunk-title">Hand calcs, then the pool doesn't lie.</div>
+      <div class="chunk-body">
+        <p>
+          Buoyancy budget was built from <strong>SolidWorks volume outputs + component weight
+          logs</strong>, cross-checked by suspended weighing. Final validation was done in
+          the pool with foam buoyancy inserts — if the math is wrong, you find out immediately.
+        </p>
+      </div>
+    </div>
+
+    <!-- Image grid: mould + layup -->
+    <div class="img-grid">
+      <div class="img-full">
+        <!-- <img src="images/subc-mould.jpg" alt="Hull mould" /> -->
+        <div class="img-placeholder">[ Mould photo — images/subc-mould.jpg ]</div>
+      </div>
+      <div class="img-full">
+        <!-- <img src="images/subc-layup.jpg" alt="Wet layup process" /> -->
+        <div class="img-placeholder">[ Layup process — images/subc-layup.jpg ]</div>
+      </div>
+    </div>
+
+    <!-- Section 4: Manufacturing -->
+    <div class="section-chunk">
+      <div class="chunk-label">Manufacturing</div>
+      <div class="chunk-title">Wet layup and vacuum bag GFRP.</div>
+      <div class="chunk-body">
+        <p>
+          Hull shell is fibreglass, manufactured via <strong>wet layup and vacuum bag</strong>
+          processes. I've trained the team on both — and spent enough time in a respirator
+          to have opinions about PPE.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 5: Pool testing -->
+    <div class="section-chunk">
+      <div class="chunk-label">Testing</div>
+      <div class="chunk-title">In the water, not just watching from the deck.</div>
+      <div class="chunk-body">
+        <p>
+          Pool tests are where design decisions get judged. I serve as a <strong>support diver</strong>
+          during testing: preventing wall collisions, communicating with the pilot, handling underwater
+          hardware fixes, and assisting pilot ingress and egress. When something doesn't work, you know
+          immediately — and you fix it in the water.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pool test image -->
+    <div class="img-full">
+      <!-- <img src="images/subc-pool.jpg" alt="Pool testing" /> -->
+      <div class="img-placeholder">[ Pool test photo — images/subc-pool.jpg ]</div>
+    </div>
+
+  </div>
+
+  <div class="project-nav">
+    <a href="index.html">← All Projects</a>
+    <a href="subc-steering.html">Next: Steering Mechanism →</a>
+  </div>
+
+</body>
+</html>
