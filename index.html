@@ -3,756 +3,563 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaïto Dapremont Shimamura — Portfolio</title>
+  <title>Kaïto D.S. — Engineering Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0e0e0e;
-      --surface: #161616;
-      --card: #1c1c1c;
-      --border: #2a2a2a;
-      --accent: #c8a96e;
-      --accent2: #4a8fa8;
-      --text: #e8e4dc;
-      --muted: #7a756c;
-      --tag-bg: #222;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.5;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(14,14,14,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--accent);
-      letter-spacing: 0.03em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    /* ── HERO ── */
-    .hero {
+      background: #f4f1eb;
+      color: #1a1a1a;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 400;
       min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    mono {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    /* ── GRID ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── BASE CARD ── */
+    .card {
+      background: #faf8f4;
+      border: 1.5px solid #d4cfc6;
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* ── CARD SPANS ── */
+    .c-12 { grid-column: span 12; }
+    .c-8  { grid-column: span 8; }
+    .c-7  { grid-column: span 7; }
+    .c-6  { grid-column: span 6; }
+    .c-5  { grid-column: span 5; }
+    .c-4  { grid-column: span 4; }
+    .c-3  { grid-column: span 3; }
+
+    /* ── NAME CARD ── */
+    .card-name {
+      background: #1a1a1a;
+      color: #f4f1eb;
+      padding: 2rem 1.8rem;
+    }
+
+    .card-name h1 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 500;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-name p {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    /* ── BIO CARD ── */
+    .card-bio p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #444;
+    }
+
+    .card-bio p + p { margin-top: 0.7rem; }
+
+    /* ── STATUS CARD ── */
+    .card-status {
+      background: #e8f5e2;
+      border-color: #b8d9aa;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 8rem 3rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
+      justify-content: space-between;
     }
 
-    .hero-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.1s forwards;
+    .status-dot {
+      width: 8px; height: 8px;
+      background: #4a9e35;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
     }
 
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 600;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.2s forwards;
+    .status-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: #3a7a28;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
+    .status-big {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 1rem;
+      line-height: 1.4;
     }
 
-    .hero-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.8;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.35s forwards;
+    /* ── CONTACT CARD ── */
+    .card-contact {
+      background: #1a1a1a;
+      color: #f4f1eb;
     }
 
-    .hero-sub strong {
-      color: var(--text);
-      font-weight: 400;
-    }
+    .contact-links { margin-top: 0.8rem; }
 
-    .hero-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.5s forwards;
-    }
-
-    .btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.7rem 1.5rem;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn:hover { background: var(--accent); color: var(--bg); }
-
-    .btn-ghost {
-      border-color: var(--border);
-      color: var(--muted);
-    }
-
-    .btn-ghost:hover { background: var(--border); color: var(--text); }
-
-    /* Decorative line */
-    .hero-line {
-      position: absolute;
-      right: 3rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1px;
-      height: 200px;
-      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-      opacity: 0.4;
-    }
-
-    /* ── SECTION COMMON ── */
-    section {
-      padding: 6rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      margin-bottom: 3rem;
-      line-height: 1.1;
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-    }
-
-    .about-text p strong { color: var(--text); font-weight: 400; }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .stat-card {
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      background: var(--card);
-    }
-
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-      gap: 2px;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: inherit;
+    .contact-link {
       display: block;
-      overflow: hidden;
-      position: relative;
-      transition: border-color 0.3s;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: #aaa;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #333;
+      transition: color 0.15s;
     }
 
-    .project-card:hover { border-color: var(--accent); }
+    .contact-link:last-child { border-bottom: none; }
+    .contact-link:hover { color: #f4f1eb; }
 
-    .project-card:hover .project-img img {
-      transform: scale(1.04);
+    /* ── PROJECT CARDS ── */
+    .card-project {
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-project:hover {
+      border-color: #1a1a1a;
+      background: #f0ede6;
     }
 
     .project-img {
       width: 100%;
       aspect-ratio: 16/9;
+      background: #e4e0d8;
+      border: 1px solid #d4cfc6;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      background: var(--surface);
-      position: relative;
     }
 
     .project-img img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
-      filter: brightness(0.8);
     }
 
-    .project-img-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--border);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .project-body {
-      padding: 1.8rem 2rem;
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
-
-    .project-role {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .project-year {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
+    .project-img-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: #bbb;
+      text-align: center;
+      padding: 1rem;
+      line-height: 1.6;
     }
 
     .project-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      line-height: 1.2;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
     }
 
     .project-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.65;
+      flex: 1;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 4px;
+      margin-top: 0.9rem;
     }
 
     .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      padding: 0.25rem 0.6rem;
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      letter-spacing: 0.05em;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      padding: 2px 7px;
+      border: 1px solid #d4cfc6;
+      color: #777;
+      background: #edeae3;
     }
 
     .project-arrow {
       position: absolute;
-      bottom: 1.8rem;
-      right: 2rem;
-      font-size: 1.2rem;
-      color: var(--border);
-      transition: color 0.2s, transform 0.2s;
+      top: 1.2rem; right: 1.2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: #ccc;
+      transition: color 0.15s;
     }
 
-    .project-card:hover .project-arrow {
-      color: var(--accent);
-      transform: translate(3px, -3px);
-    }
+    .card-project:hover .project-arrow { color: #1a1a1a; }
 
-    /* ── EXPERIENCE ── */
-    .exp-item {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 3rem;
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--border);
-    }
+    /* ── SKILLS CARD ── */
+    .card-skills { }
 
-    .exp-left {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      line-height: 1.8;
-    }
-
-    .exp-left strong {
-      color: var(--accent);
-      display: block;
-      margin-bottom: 0.3rem;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .exp-right h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .exp-right .exp-company {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent2);
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-
-    .exp-right p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    .skill-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid #e8e4dc;
+      font-size: 0.82rem;
     }
 
-    .footer-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--accent);
+    .skill-row:last-child { border-bottom: none; }
+
+    .skill-name { color: #1a1a1a; }
+    .skill-level {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: #aaa;
     }
 
-    .footer-links {
+    /* ── EXPERIENCE CARD ── */
+    .card-exp { }
+
+    .exp-header {
       display: flex;
-      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
     }
 
-    .footer-links a {
-      font-family: 'DM Mono', monospace;
+    .exp-title { font-weight: 500; font-size: 0.95rem; }
+
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: #aaa;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .exp-company {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: #888;
+      margin-bottom: 0.8rem;
+    }
+
+    .exp-desc {
+      font-size: 0.8rem;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ── LANG CARD ── */
+    .card-lang { background: #f0ede6; }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid #ddd9d1;
+      font-size: 0.82rem;
+    }
+
+    .lang-item:last-child { border-bottom: none; }
+
+    .lang-level {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: #aaa;
+    }
+
+    /* ── INTERESTS CARD ── */
+    .card-interests { background: #faf8f4; }
+
+    .interest-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.6rem;
+    }
+
+    .interest-pill {
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.68rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      padding: 4px 10px;
+      border: 1.5px solid #d4cfc6;
+      color: #555;
     }
 
-    .footer-links a:hover { color: var(--accent); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ── QUOTE CARD ── */
+    .card-quote {
+      background: #2d2b27;
+      color: #f4f1eb;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    .card-quote p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: #aaa;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    /* ── STAT CARDS ── */
+    .card-stat {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    /* ── DIVIDER ── */
-    .full-divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
+    .stat-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 500;
+      line-height: 1;
+      margin: 0.5rem 0;
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .hero h1 { font-size: 3rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-      .hero-line { display: none; }
+    .stat-desc {
+      font-size: 0.75rem;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      body { padding: 0.8rem; }
+      .bento { gap: 7px; }
+
+      .c-8, .c-7, .c-5, .c-4, .c-3 { grid-column: span 12; }
+      .c-6 { grid-column: span 12; }
+
+      .card-name h1 { font-size: 1.2rem; }
+      .stat-num { font-size: 1.8rem; }
+    }
+
+    @media (min-width: 701px) and (max-width: 900px) {
+      .c-3 { grid-column: span 4; }
+      .c-4 { grid-column: span 6; }
+      .c-5 { grid-column: span 6; }
+      .c-7 { grid-column: span 7; }
+      .c-8 { grid-column: span 8; }
     }
   </style>
 </head>
 <body>
+<div class="bento">
 
-  <!-- NAV -->
-  <nav>
-    <span class="nav-name">Kaïto D.S.</span>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="mailto:DapremontShimamuraKaito@gmail.com">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-label">Manufacturing Engineer · UBC · Class of 2028</div>
-    <h1>I build things<br>and put them <em>underwater.</em></h1>
-    <p class="hero-sub">
-      3rd-year <strong>Manufacturing Engineering</strong> student at UBC.
-      I care about structural design, real fabrication, and hardware that actually works — 
-      ideally in environments where failure is educational rather than catastrophic.
-    </p>
-    <div class="hero-links">
-      <a href="#projects" class="btn">View Projects</a>
-      <a href="mailto:DapremontShimamuraKaito@gmail.com" class="btn btn-ghost">Get in Touch</a>
-    </div>
-    <div class="hero-line"></div>
+  <!-- NAME -->
+  <div class="card card-name c-7">
+    <h1>Kaïto Matthieu<br>Dapremont Shimamura</h1>
+    <p>Manufacturing Engineering student at UBC. I design things, build them, and sometimes test them underwater.</p>
   </div>
 
-  <div class="full-divider"></div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label">About</div>
-    <div class="section-title">French-Japanese, based in Vancouver.</div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          I grew up between France and Japan, which means I have strong opinions about both
-          <strong>train infrastructure</strong> and food. I ended up in engineering because
-          I like understanding how things work well enough to build better ones.
-        </p>
-        <p>
-          My work spans structural analysis, composites fabrication, mechanical design,
-          and electronics — whatever the problem calls for. I have a PADI cert and I've
-          spent enough time underwater testing submarines to know that <strong>hardware
-          behaves differently when it's wet.</strong>
-        </p>
-        <p>
-          Languages: French (native), Japanese (native), English (bilingual), Spanish (surviving).
-        </p>
-      </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">10</div>
-          <div class="stat-label">Engineers led on hull team</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Fabrication processes trained</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">A350</div>
-          <div class="stat-label">Aircraft family, Gardner Aerospace</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Iterations before it's right</div>
-        </div>
-      </div>
+  <!-- STATUS -->
+  <div class="card card-status c-3">
+    <span class="card-label">availability</span>
+    <div>
+      <span class="status-dot"></span>
+      <span class="status-text">Open to co-ops</span>
     </div>
-  </section>
+    <div class="status-big">Fall 2026<br>co-op ready</div>
+  </div>
 
-  <div class="full-divider"></div>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label">Work</div>
-    <div class="section-title">Engineering Projects</div>
-    <div class="projects-grid">
-
-      <!-- PROJECT 1: SUBC Hull -->
-      <a href="subc-hull.html" class="project-card reveal">
-        <div class="project-img">
-          <!-- Replace src with your actual image path, e.g. images/subc-hull-hero.jpg -->
-          <div class="project-img-placeholder">[ CAD render / finished sub photo ]</div>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-role">Hull Team Lead</span>
-            <span class="project-year">2025 – Present</span>
-          </div>
-          <div class="project-title">Human-Powered Submarine — Hull</div>
-          <p class="project-desc">
-            Led a team of 10 designing the hull, viewports, and hatches of a competition
-            submarine. CFD-iterated geometry, pool-validated buoyancy, and structural
-            testing through dogleg samples and tophat rib reinforcements.
-          </p>
-          <div class="project-tags">
-            <span class="tag">SolidWorks</span>
-            <span class="tag">CFD</span>
-            <span class="tag">Composites</span>
-            <span class="tag">Structural Analysis</span>
-            <span class="tag">Pool Testing</span>
-            <span class="tag">GFRP</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <!-- PROJECT 2: SUBC Steering -->
-      <a href="subc-steering.html" class="project-card reveal">
-        <div class="project-img">
-          <!-- Replace src with your actual image path -->
-          <div class="project-img-placeholder">[ steering mechanism CAD / prototype photo ]</div>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-role">Mechanical Designer</span>
-            <span class="project-year">2024 – 2025</span>
-          </div>
-          <div class="project-title">Human-Powered Submarine — Steering</div>
-          <p class="project-desc">
-            Designed a full pitch/yaw steering mechanism with complete mechanical
-            independence between axes and neutral position feedback. Rapid-prototyped
-            in FDM before committing to final design.
-          </p>
-          <div class="project-tags">
-            <span class="tag">SolidWorks</span>
-            <span class="tag">DFMA</span>
-            <span class="tag">Additive Mfg</span>
-            <span class="tag">Mechanism Design</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <!-- PROJECT 3: RC Car -->
-      <a href="rc-car.html" class="project-card reveal">
-        <div class="project-img">
-          <div class="project-img-placeholder">[ cast wheel / FEA screenshot / dogbone test ]</div>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-role">Team Member</span>
-            <span class="project-year">2025 – 2026</span>
-          </div>
-          <div class="project-title">RC Car — Design & Volume Production</div>
-          <p class="project-desc">
-            Sand-cast aluminium wheels, then redesigned geometry for die-casting at scale.
-            Validated FEA through ASTM mechanical testing on composite chassis and
-            thermoformed shell specimens to failure.
-          </p>
-          <div class="project-tags">
-            <span class="tag">FEA / ANSYS</span>
-            <span class="tag">Sand Casting</span>
-            <span class="tag">Die Casting</span>
-            <span class="tag">ASTM Testing</span>
-            <span class="tag">Composites</span>
-            <span class="tag">FMEA</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <!-- PROJECT 4: MECH 368 -->
-      <a href="mech368.html" class="project-card reveal">
-        <div class="project-img">
-          <div class="project-img-placeholder">[ breadboard / soldering / robot photo ]</div>
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-role">MECH 368 Lab</span>
-            <span class="project-year">Jan – Apr 2026</span>
-          </div>
-          <div class="project-title">Instrumentation & Measurements Lab</div>
-          <p class="project-desc">
-            Built analog signal conditioning chains, soldered hardware, implemented
-            PID motor control, and assembled a wireless autonomous differential-drive
-            robot with obstacle avoidance and line following.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Arduino</span>
-            <span class="tag">Signal Conditioning</span>
-            <span class="tag">Soldering</span>
-            <span class="tag">PID Control</span>
-            <span class="tag">I2C / BLE</span>
-            <span class="tag">IMU</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-
-      <!-- TEMPLATE: Copy this block to add new projects -->
-      <!--
-      <a href="your-project.html" class="project-card reveal">
-        <div class="project-img">
-          <img src="images/your-image.jpg" alt="Project name" />
-        </div>
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-role">Your Role</span>
-            <span class="project-year">Year</span>
-          </div>
-          <div class="project-title">Project Title</div>
-          <p class="project-desc">
-            Short description. What did you design, build, and validate?
-          </p>
-          <div class="project-tags">
-            <span class="tag">Skill 1</span>
-            <span class="tag">Skill 2</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </a>
-      -->
-
+  <!-- CONTACT -->
+  <div class="card card-contact c-2">
+    <span class="card-label" style="color:#666">links</span>
+    <div class="contact-links">
+      <a href="mailto:DapremontShimamuraKaito@gmail.com" class="contact-link">email ↗</a>
+      <a href="https://linkedin.com/in/kdaprshim" target="_blank" class="contact-link">linkedin ↗</a>
+      <a href="files/CV.pdf" class="contact-link">resume ↗</a>
     </div>
-  </section>
+  </div>
 
-  <div class="full-divider"></div>
+  <!-- BIO -->
+  <div class="card card-bio c-8">
+    <span class="card-label">about</span>
+    <p>3rd-year BASc Manufacturing Engineering at UBC (class of 2028). My work spans structural analysis, composites fabrication, mechanical design, and electronics — whatever the problem calls for.</p>
+    <p>Grew up between France and Japan. Have strong opinions about train infrastructure and even stronger ones about what counts as validated FEA. PADI certified, and I've spent enough time underwater testing submarines to know hardware behaves differently when it's wet.</p>
+  </div>
+
+  <!-- STAT: Team size -->
+  <div class="card card-stat c-4">
+    <span class="card-label">hull team</span>
+    <div class="stat-num">10</div>
+    <div class="stat-desc">engineers led, end-to-end submarine hull development</div>
+  </div>
+
+  <!-- PROJECT 1: SUBC Hull -->
+  <a href="subc-hull.html" class="card card-project c-6">
+    <span class="card-label">01 — hull team lead</span>
+    <span class="project-arrow">↗</span>
+    <div class="project-img">
+      <!-- <img src="images/subc-hull-hero.jpg" alt="Submarine hull" /> -->
+      <div class="project-img-text">images/subc-hull-hero.jpg</div>
+    </div>
+    <div class="project-title">Human-Powered Submarine — Hull</div>
+    <p class="project-desc">CFD-iterated geometry, pool-validated buoyancy, dogleg-tested structural reinforcements. Also drove it underwater as support diver.</p>
+    <div class="project-tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">CFD</span>
+      <span class="tag">GFRP</span>
+      <span class="tag">Structural testing</span>
+      <span class="tag">Pool testing</span>
+    </div>
+  </a>
+
+  <!-- PROJECT 2: SUBC Steering -->
+  <a href="subc-steering.html" class="card card-project c-6">
+    <span class="card-label">02 — mechanical designer</span>
+    <span class="project-arrow">↗</span>
+    <div class="project-img">
+      <div class="project-img-text">images/subc-steering-cad.jpg</div>
+    </div>
+    <div class="project-title">Submarine Steering Mechanism</div>
+    <p class="project-desc">Full pitch/yaw sub-assembly redesigned for mechanical independence between axes. Rapid-prototyped in FDM before committing.</p>
+    <div class="project-tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">Additive mfg</span>
+      <span class="tag">DFMA</span>
+      <span class="tag">Mechanism design</span>
+    </div>
+  </a>
+
+  <!-- PROJECT 3: RC Car -->
+  <a href="rc-car.html" class="card card-project c-6">
+    <span class="card-label">03 — team member</span>
+    <span class="project-arrow">↗</span>
+    <div class="project-img">
+      <div class="project-img-text">images/rc-wheel-cast.jpg</div>
+    </div>
+    <div class="project-title">RC Car — Design & Volume Production</div>
+    <p class="project-desc">Sand-cast aluminium wheels, then redesigned for die-casting. FEA validated through ASTM tests on composite and thermoformed specimens to failure.</p>
+    <div class="project-tags">
+      <span class="tag">FEA / ANSYS</span>
+      <span class="tag">Sand casting</span>
+      <span class="tag">Die casting</span>
+      <span class="tag">ASTM testing</span>
+    </div>
+  </a>
+
+  <!-- PROJECT 4: MECH 368 -->
+  <a href="mech368.html" class="card card-project c-6">
+    <span class="card-label">04 — mech 368 lab</span>
+    <span class="project-arrow">↗</span>
+    <div class="project-img">
+      <div class="project-img-text">images/mech368-breadboard.jpg</div>
+    </div>
+    <div class="project-title">Instrumentation & Measurements Lab</div>
+    <p class="project-desc">Soldered analog signal conditioning chains, PID motor controller, IMU fusion. Built a wireless autonomous differential-drive robot.</p>
+    <div class="project-tags">
+      <span class="tag">Arduino</span>
+      <span class="tag">Soldering</span>
+      <span class="tag">PID control</span>
+      <span class="tag">I2C / BLE</span>
+    </div>
+  </a>
+
+  <!-- SKILLS -->
+  <div class="card card-skills c-4">
+    <span class="card-label">skills</span>
+    <div class="skill-row"><span class="skill-name">SolidWorks / CATIA / ANSYS</span><span class="skill-level">daily</span></div>
+    <div class="skill-row"><span class="skill-name">Composites (wet layup, vac bag)</span><span class="skill-level">hands-on</span></div>
+    <div class="skill-row"><span class="skill-name">FEA + physical validation</span><span class="skill-level">validated</span></div>
+    <div class="skill-row"><span class="skill-name">Arduino / embedded C</span><span class="skill-level">comfortable</span></div>
+    <div class="skill-row"><span class="skill-name">Sand & die casting</span><span class="skill-level">done it</span></div>
+    <div class="skill-row"><span class="skill-name">Additive mfg (FDM / SLA)</span><span class="skill-level">regular</span></div>
+    <div class="skill-row"><span class="skill-name">Python / Matlab</span><span class="skill-level">scripting</span></div>
+    <div class="skill-row"><span class="skill-name">GD&T / Engineering drawings</span><span class="skill-level">professional</span></div>
+  </div>
 
   <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="section-label">Experience</div>
-    <div class="section-title">Professional</div>
-
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <strong>Aerospace</strong>
-        May – July 2024<br>
-        Mielec, Poland
-      </div>
-      <div class="exp-right">
-        <h3>QC Engineer Intern</h3>
-        <div class="exp-company">Gardner Aerospace</div>
-        <p>
-          Reviewed engineering drawings and CATIA assemblies for Airbus A350 structural
-          components against ISO and Airbus-specific GD&T standards. Flagged non-conformities
-          before production release, updated MRP for new assembly instructions, and proposed
-          factory layouts in SolidWorks for CNC flow optimisation. I went alone, spoke no
-          Polish, figured it out.
-        </p>
-      </div>
+  <div class="card card-exp c-5">
+    <span class="card-label">work experience</span>
+    <div class="exp-header">
+      <div class="exp-title">QC Engineer Intern</div>
+      <div class="exp-date">May–Jul 2024</div>
     </div>
-  </section>
+    <div class="exp-company">Gardner Aerospace — Mielec, Poland</div>
+    <div class="exp-desc">
+      Reviewed CATIA assemblies and engineering drawings for Airbus A350 structural components against ISO and Airbus-specific GD&T standards. Flagged non-conformities before production release, updated MRP for new assembly instructions, and proposed factory layouts in SolidWorks. Went alone, spoke no Polish, figured it out.
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="card card-quote c-3">
+    <p>"Hardware behaves differently when it's wet."</p>
+  </div>
+
+  <!-- LANGUAGES -->
+  <div class="card card-lang c-3">
+    <span class="card-label">languages</span>
+    <div class="lang-item"><span>French</span><span class="lang-level">native</span></div>
+    <div class="lang-item"><span>Japanese</span><span class="lang-level">native</span></div>
+    <div class="lang-item"><span>English</span><span class="lang-level">bilingual</span></div>
+    <div class="lang-item"><span>Spanish</span><span class="lang-level">surviving</span></div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="card c-5">
+    <span class="card-label">education</span>
+    <div class="exp-header">
+      <div class="exp-title">BASc Manufacturing Engineering</div>
+      <div class="exp-date">2023–2028</div>
+    </div>
+    <div class="exp-company">University of British Columbia — Vancouver</div>
+    <div class="exp-desc">3rd year. Structural analysis, fluid systems, mechanical design, materials, manufacturing processes, industrial systems.</div>
+  </div>
+
+  <!-- INTERESTS -->
+  <div class="card card-interests c-4">
+    <span class="card-label">outside of work</span>
+    <div class="interest-pills">
+      <span class="interest-pill">skiing</span>
+      <span class="interest-pill">surfing</span>
+      <span class="interest-pill">scuba diving</span>
+      <span class="interest-pill">climbing</span>
+      <span class="interest-pill">martial arts</span>
+      <span class="interest-pill">sewing</span>
+      <span class="interest-pill">cooking</span>
+      <span class="interest-pill">public transit nerd</span>
+    </div>
+  </div>
 
   <!-- FOOTER -->
-  <div class="full-divider"></div>
-  <footer>
-    <span class="footer-name">Kaïto Matthieu Dapremont Shimamura</span>
-    <div class="footer-links">
-      <a href="mailto:DapremontShimamuraKaito@gmail.com">Email</a>
-      <a href="https://linkedin.com/in/kdaprshim" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
+  <div class="card c-12" style="background: #1a1a1a; color: #555; padding: 1rem 1.4rem; display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;">kaïto matthieu dapremont shimamura — 2026</span>
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;">vancouver, bc</span>
+  </div>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+</div>
 </body>
 </html>
